@@ -1,27 +1,21 @@
 from pack import makeCbox
-import sys
+import argparse
+import const
 
-args = sys.argv[1:]
+def main():
+    parser=argparse.ArgumentParser(
+        prog="cbox",
+        description="Pack files into .CBoX archive files",
+        suggest_on_error=True,
+        add_help=True,
+        formatter_class=argparse.RawDescriptionHelpFormatter
+    )
+    parser.add_argument("file", help="file to pack")
+    parser.add_argument("-o", "--output", default="myArchive.cbox",
+                        help="output archive (default: myArchive.cbox)")
+    parser.add_argument('-v', '--version', action='version', version=const.VersionInfo)
+    args = parser.parse_args()
+    print(args)
 
-if len(args) == 0:
-    print("ERROR: No argv payload")
-    print("Use:")
-    print("     python3 src/main.py {fileToPack} -o {outputFile}")
-
-file = None
-meta = None
-output = "myArchive.cbox"
-try:
-    file = args[0]
-    meta = args[1]
-    output = args[2]
-except:
-    pass
-
-if meta and not output:
-    print("ERROR: No output file payload")
-    print("Use:")
-    print("     python3 src/main.py {fileToPack} -o {outputFile}")
-
-makeCbox(output, file)
-print("Done!")
+if __name__ == "__main__": 
+    main()
