@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cbox"
+version = "0.2.2"
+description = "Pack files into .CBoX archive files!"
+requires-python = ">=3.10"
+
+[project.scripts]
+cbox = "src.cbox:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
